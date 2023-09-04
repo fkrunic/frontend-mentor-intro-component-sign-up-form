@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { match } from 'ts-pattern'
+import { match, P } from 'ts-pattern'
 import { Validator } from '../common';
 
 type FieldState
   = { kind: 'inactive' }
-  | { kind: 'invalid' }
+  | { kind: 'invalid', err: string }
   | { kind: 'valid' }
 
 defineProps<{ 
@@ -24,8 +24,8 @@ const onInput = (fieldName: string, event: Event, validator: Validator) => {
       fieldState.value = { kind: 'valid' }
       emit('validInput')
     })
-    .with({ kind: 'invalid' }, () => {
-      fieldState.value = { kind: 'invalid' }
+    .with({ kind: 'invalid', err: P.select() }, (err) => {
+      fieldState.value = { kind: 'invalid', err }
       emit('invalidInput')
     })
     .exhaustive()
@@ -76,6 +76,6 @@ const stateClasses = (fs: FieldState): Array<string> => {
     @input="(event) => onInput(fieldName, event, validator)"
     > 
 
-    <p class="text-right text-xs text-red" v-if="fieldState.kind === 'invalid'">Woops</p>
+    <p class="text-right text-xs text-red" v-if="fieldState.kind === 'invalid'">{{  fieldState.err }}</p>
   </div>
 </template>
