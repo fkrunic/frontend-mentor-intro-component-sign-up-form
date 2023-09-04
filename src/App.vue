@@ -59,7 +59,6 @@ onMounted(() => {
 </template>
 
 <style scoped>
-
 .claim-shadow {
   box-shadow: 0 3px 0 0 hsl(154, 59%, 40%)
 }
