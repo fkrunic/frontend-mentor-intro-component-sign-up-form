@@ -1,10 +1,18 @@
 <script setup lang="ts">
-defineProps<{ field: string }>()
+type Validator = (input: string) => boolean
 
-const emit = defineEmits(['fieldInput'])
+defineProps<{ 
+  field: string, 
+  validator: Validator
+}>()
 
-const onInput = (event: Event): void => {
-  emit('fieldInput', (event.target as HTMLInputElement).value)
+const emit = defineEmits(['valid'])
+
+const onInput = (event: Event, validator: Validator) => {
+  const input = (event.target as HTMLInputElement).value
+  if (validator(input)) {
+    emit('valid')
+  }
 }
 </script>
 
@@ -31,6 +39,6 @@ const onInput = (event: Event): void => {
     " 
     type="text" 
     :placeholder="field"
-    @input="onInput"
+    @input="(event) => onInput(event, validator)"
     > 
 </template>

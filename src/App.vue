@@ -5,6 +5,14 @@ import FormField from './components/FormField.vue'
 onMounted(() => {
   document.body.className = 'font-poppins bg-red'
 })
+
+const dummyValidator = (input: string): boolean => {
+  return true
+}
+
+const onValid = () => {
+  console.log('valid')
+}
 </script>
 
 <template>
@@ -37,10 +45,10 @@ onMounted(() => {
 
         <!-- Sign-up Card -->
         <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
-          <FormField :field="'First Name'"></FormField>
-          <FormField :field="'Last Name'"></FormField>
-          <FormField :field="'Email Address'"></FormField>
-          <FormField :field="'Password'"></FormField>
+          <FormField :field="'First Name'" :validator="dummyValidator" @valid="onValid"></FormField>
+          <FormField :field="'Last Name'" :validator="dummyValidator" @valid="onValid"></FormField>
+          <FormField :field="'Email Address'" :validator="dummyValidator" @valid="onValid"></FormField>
+          <FormField :field="'Password'" :validator="dummyValidator" @valid="onValid"></FormField>
 
           <!-- Claim Button -->
           <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
