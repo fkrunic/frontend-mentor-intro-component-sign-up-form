@@ -99,13 +99,29 @@ const canSubmitForm = (fs: FormState): boolean => {
 
         <!-- Sign-up Card -->
         <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
-          <FormField :fieldName="'First Name'" :validator="nonEmptyValidator" @valid="onValidFirstName(formState)"></FormField>
-          <FormField :fieldName="'Last Name'" :validator="nonEmptyValidator" @valid="onValidLastName(formState)"></FormField>
-          <FormField :fieldName="'Email Address'" :validator="emailValidator" @valid="onValidEmail(formState)"></FormField>
-          <FormField :fieldName="'Password'" :validator="nonEmptyValidator" @valid="onValidPassword(formState)"></FormField>
+          <FormField 
+            :fieldName="'First Name'" 
+            :validator="nonEmptyValidator" 
+            @valid-input="onValidFirstName(formState)">
+          </FormField>
+          <FormField 
+            :fieldName="'Last Name'" 
+            :validator="nonEmptyValidator" 
+            @valid-input="onValidLastName(formState)">
+          </FormField>
+          <FormField 
+            :fieldName="'Email Address'" 
+            :validator="emailValidator" 
+            @valid-input="onValidEmail(formState)">
+          </FormField>
+          <FormField 
+            :fieldName="'Password'" 
+            :validator="nonEmptyValidator" 
+            @valid-input="onValidPassword(formState)">
+          </FormField>
 
           <!-- Claim Button -->
-          <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
+          <div v-if="canSubmitForm(formState)" class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
             <p class="text-white">CLAIM YOUR FREE TRIAL</p>
           </div>
 
