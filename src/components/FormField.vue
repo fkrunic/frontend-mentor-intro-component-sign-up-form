@@ -1,32 +1,34 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 import { match } from 'ts-pattern'
+import { Validator } from '../common';
 
 type FieldState
   = { kind: 'inactive' }
   | { kind: 'invalid' }
   | { kind: 'valid' }
 
-type Validator = (input: string) => boolean
-
 defineProps<{ 
-  field: string, 
+  fieldName: string, 
   validator: Validator
 }>()
 
 const emit = defineEmits(['validInput', 'invalidInput'])
 
-const onInput = (event: Event, validator: Validator) => {
+const onInput = (fieldName: string, event: Event, validator: Validator) => {
   const input = (event.target as HTMLInputElement).value
+  const res = validator(fieldName, input)
 
-  if (validator(input)) {
-    fieldState.value = { kind: 'valid' }
-    emit('validInput')
-  }
-  else {
-    fieldState.value = { kind: 'invalid' }
-    emit('invalidInput')
-  }
+  match(res)
+    .with({ kind: 'valid'}, () => {
+      fieldState.value = { kind: 'valid' }
+      emit('validInput')
+    })
+    .with({ kind: 'invalid' }, () => {
+      fieldState.value = { kind: 'invalid' }
+      emit('invalidInput')
+    })
+    .exhaustive()
 }
 
 const fieldState = ref({ kind: 'inactive' } as FieldState)
@@ -69,7 +71,7 @@ const stateClasses = (fs: FieldState): Array<string> => {
     " 
     type="text" 
     :class="stateClasses(fieldState)"
-    :placeholder="field"
-    @input="(event) => onInput(event, validator)"
+    :placeholder="fieldName"
+    @input="(event) => onInput(fieldName, event, validator)"
     > 
 </template>
