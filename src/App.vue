@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
+import FormField from './components/FormField.vue'
 
 onMounted(() => {
   document.body.className = 'font-poppins bg-red'
@@ -36,18 +37,10 @@ onMounted(() => {
 
         <!-- Sign-up Form -->
         <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl">
-          <div class="w-full p-4 border-solid border-2 border-grayish-blue rounded">
-            <p class="text-sm font-semibold text-dark-blue/70">First Name</p>
-          </div>
-          <div class="w-full p-4 border-solid border-2 border-grayish-blue rounded">
-            <p class="text-sm font-semibold text-dark-blue/70">Last Name</p>
-          </div>
-          <div class="w-full p-4 border-solid border-2 border-grayish-blue rounded">
-            <p class="text-sm font-semibold text-dark-blue/70">Email Address</p>
-          </div>
-          <div class="w-full p-4 border-solid border-2 border-grayish-blue rounded">
-            <p class="text-sm font-semibold text-dark-blue/70">Password</p>
-          </div>          
+          <FormField :field="'First Name'"></FormField>
+          <FormField :field="'Last Name'"></FormField>
+          <FormField :field="'Email Address'"></FormField>
+          <FormField :field="'Password'"></FormField>
 
           <!-- Claim Button -->
           <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg">
