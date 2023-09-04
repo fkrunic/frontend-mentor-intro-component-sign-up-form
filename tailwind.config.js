@@ -17,7 +17,8 @@ export default {
       green: 'hsl(154, 59%, 51%)',
       blue: 'hsl(248, 32%, 49%)',
       'dark-blue': 'hsl(249, 10%, 26%)',
-      'grayish-blue': 'hsl(246, 25%, 77%)'
+      'grayish-blue': 'hsl(246, 25%, 77%)',
+      white: 'hsl(0, 0%, 100%)'
     },
     backgroundImage: {
       'desktop-wallpaper': "url('./assets/bg-intro-desktop.png')",
