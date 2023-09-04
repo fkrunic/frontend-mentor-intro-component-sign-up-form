@@ -6,8 +6,8 @@ onMounted(() => {
   document.body.className = 'font-poppins bg-red'
 })
 
-const dummyValidator = (input: string): boolean => {
-  return true
+const nonEmptyValidator = (input: string): boolean => {
+  return input.length > 0
 }
 
 const onValid = () => {
@@ -45,10 +45,10 @@ const onValid = () => {
 
         <!-- Sign-up Card -->
         <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
-          <FormField :field="'First Name'" :validator="dummyValidator" @valid="onValid"></FormField>
-          <FormField :field="'Last Name'" :validator="dummyValidator" @valid="onValid"></FormField>
-          <FormField :field="'Email Address'" :validator="dummyValidator" @valid="onValid"></FormField>
-          <FormField :field="'Password'" :validator="dummyValidator" @valid="onValid"></FormField>
+          <FormField :field="'First Name'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
+          <FormField :field="'Last Name'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
+          <FormField :field="'Email Address'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
+          <FormField :field="'Password'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
 
           <!-- Claim Button -->
           <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
