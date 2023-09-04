@@ -14,14 +14,18 @@ defineProps<{
   validator: Validator
 }>()
 
+const emit = defineEmits(['validInput', 'invalidInput'])
+
 const onInput = (event: Event, validator: Validator) => {
   const input = (event.target as HTMLInputElement).value
 
   if (validator(input)) {
     fieldState.value = { kind: 'valid' }
+    emit('validInput')
   }
   else {
     fieldState.value = { kind: 'invalid' }
+    emit('invalidInput')
   }
 }
 
