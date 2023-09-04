@@ -1,4 +1,12 @@
 <script setup lang="ts">
+import { ref } from 'vue';
+import { match } from 'ts-pattern'
+
+type FieldState
+  = { kind: 'inactive' }
+  | { kind: 'invalid' }
+  | { kind: 'valid' }
+
 type Validator = (input: string) => boolean
 
 defineProps<{ 
@@ -6,14 +14,36 @@ defineProps<{
   validator: Validator
 }>()
 
-const emit = defineEmits(['valid'])
-
 const onInput = (event: Event, validator: Validator) => {
   const input = (event.target as HTMLInputElement).value
+
   if (validator(input)) {
-    emit('valid')
+    fieldState.value = { kind: 'valid' }
+  }
+  else {
+    fieldState.value = { kind: 'invalid' }
   }
 }
+
+const fieldState = ref({ kind: 'inactive' } as FieldState)
+
+const stateClasses = (fs: FieldState): Array<string> => {
+  return match(fs)
+    .with({ kind: 'inactive' }, () => [
+      'border-[1px]',
+      'border-grayish-blue/50'
+    ])
+    .with({ kind: 'valid' }, () => [
+      'border-[1px]',
+      'border-green'
+    ])
+    .with({ kind: 'invalid'}, () => [
+      'border-[1px]',
+      'border-red'
+    ])
+    .exhaustive()
+}
+
 </script>
 
 <template>
@@ -31,13 +61,10 @@ const onInput = (event: Event, validator: Validator) => {
     text-dark-blue/50
     placeholder-dark-blue/25
 
-    focus:outline-none
-    focus:border-blue
-    focus:border-[2px]
-    focus:text-dark-blue/75
-    focus:-my-[1px]
+    outline-none
     " 
     type="text" 
+    :class="stateClasses(fieldState)"
     :placeholder="field"
     @input="(event) => onInput(event, validator)"
     > 
