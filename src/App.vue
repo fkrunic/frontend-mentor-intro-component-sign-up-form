@@ -29,14 +29,14 @@ onMounted(() => {
       <div class="flex flex-col items-center m-6 gap-6">
 
         <!-- Free Trial Banner -->
-        <div class="flex flex-col items-center w-full p-6 bg-blue rounded-xl">
+        <div class="flex flex-col items-center w-full p-6 bg-blue rounded-xl hard-shadow">
           <p class="w-40 text-center text-sm text-white">
             <span class="font-bold">Try it free 7 days</span> then $20/mo. thereafter
           </p>
         </div>
 
-        <!-- Sign-up Form -->
-        <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl">
+        <!-- Sign-up Card -->
+        <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
           <FormField :field="'First Name'"></FormField>
           <FormField :field="'Last Name'"></FormField>
           <FormField :field="'Email Address'"></FormField>
@@ -57,3 +57,9 @@ onMounted(() => {
     </div>
   </div>
 </template>
+
+<style scoped>
+.hard-shadow {
+  box-shadow: 0 8px 0 0 hsla(0, 0%, 0%, 15%)
+}
+</style>
