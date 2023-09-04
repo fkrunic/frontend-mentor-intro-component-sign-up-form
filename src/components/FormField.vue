@@ -1,5 +1,11 @@
 <script setup lang="ts">
 defineProps<{ field: string }>()
+
+const emit = defineEmits(['fieldInput'])
+
+const onInput = (event: Event): void => {
+  emit('fieldInput', (event.target as HTMLInputElement).value)
+}
 </script>
 
 <template>
@@ -25,5 +31,6 @@ defineProps<{ field: string }>()
     " 
     type="text" 
     :placeholder="field"
+    @input="onInput"
     > 
 </template>
