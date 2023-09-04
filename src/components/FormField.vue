@@ -53,12 +53,12 @@ const stateClasses = (fs: FieldState): Array<string> => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2 items-end">
+  <div class="relative flex flex-col gap-2 items-end">
     <input class="
     w-full 
     p-4 
     
-    border-solid 
+    border-solid
     border-[1px] 
     border-grayish-blue/50
     rounded
@@ -75,7 +75,7 @@ const stateClasses = (fs: FieldState): Array<string> => {
     :placeholder="fieldName"
     @input="(event) => onInput(fieldName, event, validator)"
     > 
-
     <p class="text-right text-xs text-red" v-if="fieldState.kind === 'invalid'">{{  fieldState.err }}</p>
+    <img class="absolute top-4 right-4" src="../assets/icon-error.svg" v-if="fieldState.kind === 'invalid'">
   </div>
 </template>
