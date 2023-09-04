@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { onMounted } from 'vue';
 import FormField from './components/FormField.vue'
-import { ValidationResult } from './common';
+import { ValidationResult } from './common'
+import * as EmailValidator from 'email-validator'
 
 onMounted(() => {
   document.body.className = 'font-poppins bg-red'
@@ -12,6 +13,16 @@ const nonEmptyValidator = (fieldName: string, input: string): ValidationResult =
     return { kind: 'valid' }
   } else {
     return { kind: 'invalid', err: fieldName + ' cannot be empty.'}
+  }
+}
+
+const emailValidator = (_fieldName: string, input: string): ValidationResult => {
+  if (EmailValidator.validate(input)) {
+    return { kind: 'valid' }
+  } else if (input.length == 0) {
+    return { kind: 'invalid', err: 'Email Address cannot be empty.' }
+  } else {
+    return { kind: 'invalid', err: "This does not look like an email address." }
   }
 }
 
@@ -52,7 +63,7 @@ const onValid = () => {
         <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
           <FormField :fieldName="'First Name'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
           <FormField :fieldName="'Last Name'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
-          <FormField :fieldName="'Email Address'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
+          <FormField :fieldName="'Email Address'" :validator="emailValidator" @valid="onValid"></FormField>
           <FormField :fieldName="'Password'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
 
           <!-- Claim Button -->
