@@ -53,7 +53,8 @@ const stateClasses = (fs: FieldState): Array<string> => {
 </script>
 
 <template>
-  <input class="
+  <div class="flex flex-row gap-2 items-center">
+    <input class="
     w-full 
     p-4 
     
@@ -74,4 +75,5 @@ const stateClasses = (fs: FieldState): Array<string> => {
     :placeholder="fieldName"
     @input="(event) => onInput(fieldName, event, validator)"
     > 
+  </div>
 </template>
