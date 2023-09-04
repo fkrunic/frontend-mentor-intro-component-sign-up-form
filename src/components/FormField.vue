@@ -4,17 +4,17 @@ import { ref } from 'vue';
 defineProps<{ field: string }>()
 const focused = ref(false)
 
-const toggleFieldBorder = (isFocused: boolean): string => {
-  return isFocused ? 'border-blue' : 'border-grayish-blue/50'
+const toggleFocusClasses = (isFocused: boolean): Array<string> => {
+  const fieldBorder = isFocused ? 'border-blue' : 'border-grayish-blue/50'
+  const borderSize = isFocused ? 'border-[2px]' : 'border-[1px]'
+  return [fieldBorder, borderSize]
 }
 
 const toggleFocus = () => {
-  console.log('Focused')
   focused.value = true
 }
 
 const toggleBlur = () =>{
-  console.log('Un-focused')
   focused.value = false
 }
 </script>
@@ -30,12 +30,13 @@ const toggleBlur = () =>{
     
     hover:cursor-pointer
     "
-    :class="toggleFieldBorder(focused)"
+    :class="toggleFocusClasses(focused)"
     >
     <input class="
       text-sm 
       font-semibold 
       text-dark-blue/50
+      placeholder-dark-blue/25
 
       focus:outline-none
       focus:text-dark-blue/75
@@ -47,3 +48,9 @@ const toggleBlur = () =>{
       >
   </div>    
 </template>
+
+<style scoped>
+* {
+  box-sizing: border-box;
+}
+</style>
