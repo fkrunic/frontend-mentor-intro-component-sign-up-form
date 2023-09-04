@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import FormField from './components/FormField.vue'
 import { ValidationResult } from './common'
 import * as EmailValidator from 'email-validator'
@@ -26,9 +26,47 @@ const emailValidator = (_fieldName: string, input: string): ValidationResult => 
   }
 }
 
-const onValid = () => {
-  console.log('valid')
+type FormState = {
+  validFirstName: boolean,
+  validLastName: boolean,
+  validEmail: boolean,
+  validPassword: boolean
 }
+
+const formState = ref({
+  validFirstName: false,
+  validLastName: false,
+  validEmail: false,
+  validPassword: false
+} as FormState)
+
+const onValidFirstName = (fs: FormState) => {
+  console.log('valid first name')
+  formState.value = {...fs, validFirstName: true }
+}
+
+const onValidLastName = (fs: FormState) => {
+  console.log('valid last name')
+  formState.value = {...fs, validLastName: true }
+}
+
+const onValidEmail = (fs: FormState) => {
+  console.log('valid email')
+  formState.value = {...fs, validEmail: true }
+}
+
+const onValidPassword = (fs: FormState) => {
+  console.log('valid password')
+  formState.value = {...fs, validPassword: true }
+}
+
+const canSubmitForm = (fs: FormState): boolean => {
+  return fs.validFirstName 
+    && fs.validLastName 
+    && fs.validEmail
+    && fs.validPassword
+}
+
 </script>
 
 <template>
@@ -61,10 +99,10 @@ const onValid = () => {
 
         <!-- Sign-up Card -->
         <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
-          <FormField :fieldName="'First Name'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
-          <FormField :fieldName="'Last Name'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
-          <FormField :fieldName="'Email Address'" :validator="emailValidator" @valid="onValid"></FormField>
-          <FormField :fieldName="'Password'" :validator="nonEmptyValidator" @valid="onValid"></FormField>
+          <FormField :fieldName="'First Name'" :validator="nonEmptyValidator" @valid="onValidFirstName(formState)"></FormField>
+          <FormField :fieldName="'Last Name'" :validator="nonEmptyValidator" @valid="onValidLastName(formState)"></FormField>
+          <FormField :fieldName="'Email Address'" :validator="emailValidator" @valid="onValidEmail(formState)"></FormField>
+          <FormField :fieldName="'Password'" :validator="nonEmptyValidator" @valid="onValidPassword(formState)"></FormField>
 
           <!-- Claim Button -->
           <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
