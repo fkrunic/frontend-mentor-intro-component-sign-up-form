@@ -43,7 +43,7 @@ onMounted(() => {
           <FormField :field="'Password'"></FormField>
 
           <!-- Claim Button -->
-          <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg">
+          <div class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
             <p class="text-white">CLAIM YOUR FREE TRIAL</p>
           </div>
 
@@ -59,6 +59,10 @@ onMounted(() => {
 </template>
 
 <style scoped>
+
+.claim-shadow {
+  box-shadow: 0 3px 0 0 hsl(154, 59%, 40%)
+}
 .hard-shadow {
   box-shadow: 0 8px 0 0 hsla(0, 0%, 0%, 15%)
 }
