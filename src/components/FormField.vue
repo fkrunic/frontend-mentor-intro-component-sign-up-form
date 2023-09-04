@@ -21,6 +21,7 @@ defineProps<{ field: string }>()
     focus:border-blue
     focus:border-[2px]
     focus:text-dark-blue/75
+    focus:-my-[1px]
     " 
     type="text" 
     :placeholder="field"
