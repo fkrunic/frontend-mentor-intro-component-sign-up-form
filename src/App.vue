@@ -5,7 +5,7 @@ import { ValidationResult } from './common'
 import * as EmailValidator from 'email-validator'
 
 onMounted(() => {
-  document.body.className = 'font-poppins bg-red'
+  document.body.className = 'font-poppins bg-mobile-wallpaper bg-red'
 })
 
 const nonEmptyValidator = (fieldName: string, input: string): ValidationResult => {
@@ -170,5 +170,10 @@ const claimClasses = (canSubmit: boolean): Array<string> => {
 }
 .hard-shadow {
   box-shadow: 0 8px 0 0 hsla(0, 0%, 0%, 15%)
+}
+
+.mobile-wallpaper {
+  background-color: hsl(0, 100%, 74%);
+  background-image: url('./assets/img/bg-intro-mobile.png');
 }
 </style>
