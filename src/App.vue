@@ -94,14 +94,51 @@ const claimClasses = (canSubmit: boolean): Array<string> => {
   <div class="flex items-center justify-center min-h-screen">
 
     <!-- Page Layout -->
-    <div class="flex flex-col items-center gap-10 mb-10 mt-20">
+    <div class="
+      flex 
+      flex-col 
+      items-center 
+      gap-10 
+      
+      mb-10 
+      mt-20
+      
+      desktop:flex-row
+      ">
 
       <!-- Callout -->
-      <div class="flex flex-col items-center gap-8">
-        <p class="px-8 text-center text-2xl font-bold text-white">
+      <div class="
+        flex 
+        flex-col 
+        items-center 
+        gap-8
+        
+        desktop:w-[35rem]
+        ">
+
+        <p class="
+          px-8 
+          text-center 
+          text-2xl 
+          font-bold 
+          
+          text-white
+          
+          desktop:text-5xl
+          desktop:text-left
+          ">
           Learn to code by watching others
         </p>
-        <p class="px-6 text-center text-sm text-white leading-7">
+        <p class="
+          px-6 
+          text-center 
+          text-sm 
+          text-white 
+          leading-7
+          
+          desktop:text-base
+          desktop:text-left
+          ">
           See how experienced developers solve problems in real-time.
           Watching scripted tutorials is great, but understanding how
           developers think is invaluable.
@@ -109,36 +146,77 @@ const claimClasses = (canSubmit: boolean): Array<string> => {
       </div>
 
       <!-- Interactive -->
-      <div class="flex flex-col items-center m-6 gap-6">
+      <div class="
+        flex 
+        flex-col 
+        items-center 
+        m-6 
+        gap-6
+        
+        desktop:w-[35rem]
+        ">
 
         <!-- Free Trial Banner -->
-        <div class="flex flex-col items-center w-full p-6 bg-blue rounded-xl hard-shadow">
-          <p class="w-40 text-center text-sm text-white">
+        <div class="
+          flex 
+          flex-col 
+          items-center 
+          w-full 
+
+          p-6 
+          
+          bg-blue 
+          
+          rounded-xl 
+          hard-shadow
+
+          desktop:h-14
+          desktop:justify-center
+          ">
+          <p class="w-40 text-center text-sm text-white desktop:w-80">
             <span class="font-bold">Try it free 7 days</span> then $20/mo. thereafter
           </p>
         </div>
 
         <!-- Sign-up Card -->
-        <div class="flex flex-col items-center gap-4 p-6 bg-white rounded-xl hard-shadow">
-          <FormField 
+        <div class="
+          flex 
+          flex-col 
+          items-center 
+          gap-4 
+          
+          p-6 
+          
+          bg-white 
+          rounded-xl 
+          hard-shadow
+          
+          desktop:w-[35rem]
+          desktop:p-10
+          ">
+          <FormField
+            class="desktop:w-full"
             :fieldName="'First Name'" 
             :validator="nonEmptyValidator" 
             @valid-input="onValidFirstName(formState)"
             @invalid-input="onInvalidFirstName(formState)">
           </FormField>
           <FormField 
+            class="desktop:w-full"
             :fieldName="'Last Name'" 
             :validator="nonEmptyValidator" 
             @valid-input="onValidLastName(formState)"
             @invalid-input="onInvalidLastName(formState)">
           </FormField>
           <FormField 
+            class="desktop:w-full"
             :fieldName="'Email Address'" 
             :validator="emailValidator" 
             @valid-input="onValidEmail(formState)"
             @invalid-input="onInvalidEmail(formState)">
           </FormField>
           <FormField 
+            class="desktop:w-full"
             :fieldName="'Password'" 
             :validator="nonEmptyValidator" 
             @valid-input="onValidPassword(formState)"
@@ -154,9 +232,9 @@ const claimClasses = (canSubmit: boolean): Array<string> => {
           </div>
 
           <!-- Terms and Services -->
-          <p class="text-center text-[0.6rem] text-grayish-blue font-semibold">
+          <p class="text-center text-[0.6rem] text-grayish-blue font-semibold desktop:text-xs">
             By clicking the button, you are agreeing to
-            our <span class="font-bold text-red">Terms and Services</span>
+            our <span class="font-bold text-red cursor-pointer">Terms and Services</span>
           </p>          
         </div>
       </div>
