@@ -41,30 +41,51 @@ const formState = ref({
 } as FormState)
 
 const onValidFirstName = (fs: FormState) => {
-  console.log('valid first name')
   formState.value = {...fs, validFirstName: true }
 }
 
+const onInvalidFirstName = (fs: FormState) => {
+  formState.value = {...fs, validFirstName: false }
+}
+
 const onValidLastName = (fs: FormState) => {
-  console.log('valid last name')
   formState.value = {...fs, validLastName: true }
 }
 
+const onInvalidLastName = (fs: FormState) => {
+  formState.value = {...fs, validLastName: false }
+}
+
 const onValidEmail = (fs: FormState) => {
-  console.log('valid email')
   formState.value = {...fs, validEmail: true }
 }
 
+const onInvalidEmail = (fs: FormState) => {
+  formState.value = {...fs, validEmail: false }
+}
+
 const onValidPassword = (fs: FormState) => {
-  console.log('valid password')
   formState.value = {...fs, validPassword: true }
 }
+
+const onInvalidPassword = (fs: FormState) => {
+  formState.value = {...fs, validPassword: false }
+}
+
 
 const canSubmitForm = (fs: FormState): boolean => {
   return fs.validFirstName 
     && fs.validLastName 
     && fs.validEmail
     && fs.validPassword
+}
+
+const claimClasses = (canSubmit: boolean): Array<string> => {
+  if (canSubmit) {
+    return ['bg-green', 'claim-shadow', 'cursor-pointer']
+  } else {
+    return ['bg-grayish-blue']
+  }
 }
 
 </script>
@@ -102,26 +123,33 @@ const canSubmitForm = (fs: FormState): boolean => {
           <FormField 
             :fieldName="'First Name'" 
             :validator="nonEmptyValidator" 
-            @valid-input="onValidFirstName(formState)">
+            @valid-input="onValidFirstName(formState)"
+            @invalid-input="onInvalidFirstName(formState)">
           </FormField>
           <FormField 
             :fieldName="'Last Name'" 
             :validator="nonEmptyValidator" 
-            @valid-input="onValidLastName(formState)">
+            @valid-input="onValidLastName(formState)"
+            @invalid-input="onInvalidLastName(formState)">
           </FormField>
           <FormField 
             :fieldName="'Email Address'" 
             :validator="emailValidator" 
-            @valid-input="onValidEmail(formState)">
+            @valid-input="onValidEmail(formState)"
+            @invalid-input="onInvalidEmail(formState)">
           </FormField>
           <FormField 
             :fieldName="'Password'" 
             :validator="nonEmptyValidator" 
-            @valid-input="onValidPassword(formState)">
+            @valid-input="onValidPassword(formState)"
+            @invalid-input="onInvalidPassword(formState)">
           </FormField>
 
           <!-- Claim Button -->
-          <div v-if="canSubmitForm(formState)" class="flex flex-col items-center w-full py-4 bg-green rounded-lg claim-shadow">
+          <div 
+            class="flex flex-col items-center w-full py-4 rounded-lg"
+            :class="claimClasses(canSubmitForm(formState))"
+            >
             <p class="text-white">CLAIM YOUR FREE TRIAL</p>
           </div>
 
